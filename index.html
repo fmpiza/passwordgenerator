@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Password Generator & Store</title>
+
+    <!-- Custom fonts for this template-->
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link href="css/sb-admin-2.min.css" rel="stylesheet">
+
+</head>
+
+<body class="bg-gradient-dark">
+
+    <div class="container">
+
+        <!-- Outer Row -->
+        <div class="row justify-content-center">
+
+            <div class="col-xl-10 col-lg-12 col-md-9">
+
+                <div class="card o-hidden border-0 shadow-lg my-5">
+                    <div class="card-body p-0">
+                        <!-- Nested Row within Card Body -->
+                        <div class="row">
+                            <div class="col-lg-6 d-none d-lg-block bg-login-image"></div>
+                            <div class="col-lg-6">
+                                <div class="p-5">
+                                    <div class="text-center">
+                                        <h1 class="h4 text-gray-900 mb-4"><b><font size=3>PASSWORD GENERATOR & STORE</font></b></h1>
+                                    </div>
+                                    
+
+                                    <form>
+                                        <div class="form-group">
+                                            <button class="btn btn-primary" onclick="alpha('en')" type="button">Generate Your Password</button>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="key1">Characters</label>
+                                            <input class="form-control" id="key1" value="">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="key2">Generated Password</label>
+                                            <input class="form-control" id="key2">
+                                        </div>
+                                        
+                                        
+                                        <center><h1 class="h4 text-gray-900 mb-4"><b>Store Your credentials</b></h1></center>
+                                        <section class="site-section>
+                                            <div class="container">
+                                              <div class="row justify-content-center">
+                                                <div class="col-md-5 box">
+                                                                                                   <form action="#" method="post">
+                                                        <div class="row">
+                                                            <div class="col-md-12 form-group">
+                                                                <label for="name">Username</label>
+                                                                <input type="text" id="name" class="form-control ">
+                                                              </div>
+                                                            </div>
+                                                          <div class="col-md-12 form-group">
+                                                            <label for="name">Site Name / URL</label>
+                                                            <input type="text" id="name" class="form-control ">
+                                                          </div>
+                                                        </div>
+                                                        
+                                                        <div class="row mb-5">
+                                                          <div class="col-md-12 form-group">
+                                                            <label for="name">Password</label>
+                                                            <input type="password" id="name" placeholder="Paste above Password" class="form-control ">
+                                                          </div>
+                                                        </div>
+                                                        
+                                                        <div class="row">
+                                                            
+                                                          <div class="col-md-6 form-group">
+                                                            <input type="submit" value="Store Your Credentials" class="btn btn-success">
+                                                          </div>
+                                                        </div>
+                                                        
+                                                            <div class="col-md-3 d-flex align-items-center">
+                                                                  <p class="mb-0"><a href="passwords.pdf" class="btn btn-primary px-4 py-3"><font size=2>View</font></a></p>
+                                                              </div>
+                                                         
+                                                      </form>
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </section>
+
+                                        
+                                    </form>
+                                </div>
+                                <script language="JavaScript">
+                                    String.prototype.shuffle = function() {
+                                        var a = this.split(""),
+                                            n = a.length;
+
+                                        for (var i = n - 1; i > 0; i--) {
+                                            var j = Math.floor(Math.random() * (i + 1));
+                                            var tmp = a[i];
+                                            a[i] = a[j];
+                                            a[j] = tmp;
+                                        }
+                                        return a.join("");
+                                    };
+
+                                    const cipher = () => {
+                                        let source = document.getElementById("source_text").value.toLowerCase();
+                                        document.getElementById("source_text").value = source;
+                                        let key1 = document.getElementById("key1").value.toLowerCase();
+                                        let key2 = document.getElementById("key2").value.toLowerCase();
+                                        if (key1.length !== key2.length) {
+                                            alert("Alphabet and the key lengths do not coincide!")
+                                        } else {
+                                            let dict = {};
+                                            for (let i = 0; i < key1.length; i++) {
+                                                if (key1.substr(i, 1).length > 0)
+                                                    dict[key1.substr(i, 1)] = key2.substr(i, 1);
+                                            }
+                                            let result = "";
+                                            for (let i = 0; i < source.length; i++) {
+                                                if (source.substr(i, 1) in dict)
+                                                    result = result + dict[source.substr(i, 1)];
+                                                else
+                                                    result = result + source.substr(i, 1);
+                                            }
+                                            document.getElementById("encrypted_text").value = result;
+                                        }
+                                    };
+
+                                    const alpha = (lang) => {
+                                        if (lang === "en")
+                                            document.getElementById("key1").value = "abcdefghijklmnopqrstuvwxyz";
+                                        document.getElementById("key2").value = document.getElementById("key1").value.shuffle();
+                                    };
+                                    alpha("en");
+                                </script>
+
+
+
+                                
+                                </form>
+
+                           
+                               
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    </div>
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="js/sb-admin-2.min.js"></script>
+
+</body>
+
+</html>
